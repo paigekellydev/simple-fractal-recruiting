@@ -1,7 +1,7 @@
 // User enters id into this form and the candidate id is 
-// updated in state on the Welcome page
+// updated in state on the PageContainer
 
-export default function CandidateIdForm({ handleSubmit, handleChange, formInput }) {
+export default function CandidateIdForm({ handleSubmit, onChange, formInput }) {
 
     return (
         <form onSubmit={handleSubmit}>
@@ -9,7 +9,7 @@ export default function CandidateIdForm({ handleSubmit, handleChange, formInput 
             <input 
                 type="text" 
                 name="candidateIdInput" 
-                onChange={handleChange} 
+                onChange={onChange} 
                 value={formInput}
             />
             <button type="submit">Submit</button>

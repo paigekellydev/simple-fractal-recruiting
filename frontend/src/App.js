@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Welcome from './components/Welcome';
+import PageContainer from './components/PageContainer';
 
 function App() {
   return (
@@ -8,7 +8,8 @@ function App() {
       <header className="App-header">
         Simple Fractal Recruiting App
       </header>
-      <Welcome />
+      <PageContainer />
+      <footer></footer>
     </div>
   );
 }
