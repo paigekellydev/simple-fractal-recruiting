@@ -1,4 +1,4 @@
-// function returns object of candidate percentiles. Candidate percentiles 
+// function returns object of candidate percentiles for combined score, coding score and communication score
 
 export default function PercentileCalculator(candidateInfo, scoreRecords, companies) {
     
@@ -9,7 +9,7 @@ export default function PercentileCalculator(candidateInfo, scoreRecords, compan
     // from the searched candidate's company's fractal index
     // this is a helper function for isAtSimilarCompany
     const similarCompaniesIds = () => {
-        const candidateCompanyFractal = candidateCompany().fractal_index
+        const candidateCompanyFractal = candidateCompany.fractal_index
         return (
             companies.map(company => {
                 const difference = Math.abs(candidateCompanyFractal - company.fractal_index)
@@ -90,7 +90,6 @@ export default function PercentileCalculator(candidateInfo, scoreRecords, compan
             "combinedPercentile": {combinedPercentile},
             "codingPercentile": {codingPercentile},
             "communicationPercentile": {communicationPercentile}
-
         }
     )
 }

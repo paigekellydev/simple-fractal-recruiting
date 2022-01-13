@@ -2,26 +2,13 @@ import React, { useEffect, useState } from 'react'
 import CandidateIdForm from './CandidateIdForm'
 import CandidateNotFound from './CandidateNotFound';
 import ResultsContainer from './ResultsContainer';
-
+import Percentile from '../functions/Percentile';
 const scoreRecordsUrl = 'http://localhost:8000/data'
 export default function Welcome() {
-    const [scoreRecords, setScoreRecords] = useState([])
-    const [companies, setCompanies] = useState([])
     const [formInput, setFormInput] = useState('')
     const [formSubmitted, setFormSubmitted] = useState(false)
     const [candidateId, setCandidateId] = useState(null)
-    const [candidateInfo, setCandidateInfo] = useState({})
-
-    // Retrieves scoreRecords and companies from data in db.json
-    useEffect(() => {
-        fetch(`${scoreRecordsUrl}`)
-            .then(response => response.json())
-            .then(data => {
-                setScoreRecords(data["score-records"])
-                setCompanies(data.companies)
-            })
-    },[])
-
+   
     // onChange will update input value and will update formInput in state
     const onChange = (event) => {
         setFormInput(event.target.value)
@@ -41,23 +28,19 @@ export default function Welcome() {
     // component will be displayed
     const displayResults = () => {
         if (candidateId) {
-            return scoreRecords.map(candidateInfo => {
-                if (candidateInfo.candidate_id === candidateId) {
-                    return (
-                        <ResultsContainer 
-                            key={candidateId} 
-                            candidateInfo={candidateInfo}
-                            scoreRecords={scoreRecords}
-                            companies={companies}
-                        />
-                    )
-                }
-            })
+            const results = Percentile(candidateId)
+            return (
+                <div>
+                    <p>`Coding percentile: ${results.codingPercentile}`</p>
+                    <p>`Communication percentile: ${results.communicationPercentile}`</p>
+                </div>
+            )
         } else if (formSubmitted) {
             return <CandidateNotFound candidateId={candidateId}/>
         }
     }
 
+    
     return (
         <div>
             <CandidateIdForm 
