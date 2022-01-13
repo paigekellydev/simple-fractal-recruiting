@@ -1,11 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import CandidateIdForm from './CandidateIdForm'
+// import Form from './Form'
+// import { reduxForm } from 'redux-form'
 
 export default function Welcome() {
+    const [candidateId, setCandidateId] = useState(0)
+    const [formInput, setFormInput] = useState('')
+    
+    const handleChange = (event) => {
+        setFormInput(event.target.value)
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        setCandidateId(formInput)
+        setFormInput('')
+    };
+
     return (
-        <div id="" className="app-page">
-            <h2 id="welcome-header" className='header-text'>Welcome</h2>
-            <label className="search-label">Please enter your candidate id</label>
-            <input type="text"></input>
+        <div>
+            <CandidateIdForm handleSubmit={handleSubmit} handleChange={handleChange} formInput={formInput}/>
         </div>
     )
 }
+
+
