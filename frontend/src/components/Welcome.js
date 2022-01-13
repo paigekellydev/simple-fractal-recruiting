@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import CandidateIdForm from './CandidateIdForm'
+import CandidateNotFound from './CandidateNotFound';
 // import Form from './Form'
 // import { reduxForm } from 'redux-form'
 
@@ -19,7 +20,12 @@ export default function Welcome() {
 
     return (
         <div>
-            <CandidateIdForm handleSubmit={handleSubmit} handleChange={handleChange} formInput={formInput}/>
+            <CandidateIdForm 
+                handleSubmit={handleSubmit} 
+                handleChange={handleChange} 
+                formInput={formInput}
+            />
+            <CandidateNotFound candidateId={candidateId}/>
         </div>
     )
 }
