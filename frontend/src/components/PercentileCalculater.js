@@ -1,11 +1,6 @@
-import { useEffect, useState } from 'react'
+// function returns object of candidate percentiles. Candidate percentiles 
 
-
-export default function ResultsContainer({ candidateInfo, scoreRecords, companies }) {
-
-    const [combinedPercentile, setCombinedPercentile] = useState(null)
-    const [codingPercentile, setCodingPercentile] = useState(null)
-    const [communicationPercentile, setCommunicationPercentile] = useState(null)
+export default function PercentileCalculator(candidateInfo, scoreRecords, companies) {
     
     // returns candidate company details from search, using candidate id
     const candidateCompany = companies.filter(company => company.company_id === candidateInfo.company_id)[0]
@@ -84,18 +79,18 @@ export default function ResultsContainer({ candidateInfo, scoreRecords, companie
     // communication scores is an array of each matching candidates communication score
     const communicationScores = candidatesScores("communication");
 
-    useEffect(() => {
-        setCombinedPercentile(percentile(combinedScores, "combined"));
-        setCodingPercentile(percentile(codingScores, "coding"));
-        setCommunicationPercentile(percentile(communicationScores, "communication"));
-    }, [])
+    const combinedPercentile = percentile(combinedScores, "combined")
+
+    const codingPercentile = percentile(codingScores, "coding")
+
+    const communicationPercentile = percentile(communicationScores, "communication")
 
     return (
-        <div>
-            <h2>Results Container</h2>
-            <h4>Combined Percentile: {combinedPercentile}</h4>
-            <h4>Coding Percentile: {codingPercentile}</h4>
-            <h4>Communication Percentile: {communicationPercentile}</h4>
-        </div>
+        {
+            "combinedPercentile": {combinedPercentile},
+            "codingPercentile": {codingPercentile},
+            "communicationPercentile": {communicationPercentile}
+
+        }
     )
 }
